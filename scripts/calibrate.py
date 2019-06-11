@@ -26,7 +26,6 @@ if __name__=="__main__":
   ax2.grid(linestyle='--',alpha=0.3)
   ax2.set_ylabel("Pulse Max [ADC]")
   ax2.set_xlabel("charge [e]")
-  plt.savefig('../plots/calibration.png',dpi=300)
   plt.show()
 
   # save results
@@ -34,7 +33,7 @@ if __name__=="__main__":
   for backend in ["VME","ubcm"]:
       for ich in range(1,4):
           key = "{}_CH{}".format(backend,ich)
-          fit = np.polyfit(cali[key][1:-1],cali.TPAmplitude_e[1:-1],deg=1)
+          fit = np.polyfit(cali[key][0:-1],cali.TPAmplitude_e[0:-1],deg=1)
           const[key] = fit
           
   df = pd.DataFrame(const)

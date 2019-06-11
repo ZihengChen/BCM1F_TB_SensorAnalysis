@@ -26,6 +26,11 @@ class LanGausFit:
         histogram must be of type TH1D (the D is important, errors will be thrown with a TH1F.)
         You can optionally provide the starting fit parameters. If not provided they will be automatically calculated.
         """
+        # decide if fit with fixed sigma
+        fixsigma = False
+        if startsigma is not None:
+            fixsigma = True            
+
         # get fit starting parameters and fit range
         startwidth, startmpv, startnorm, startsigma = self._getstartingparameters(histogram, startwidth, startmpv, startnorm, startsigma)
         if not fitrange:
@@ -35,6 +40,8 @@ class LanGausFit:
         tf1 = ROOT.TF1("landaugausfunction", ROOT.langaufun, xlow, xhigh, 4)
         tf1.SetParNames("LandauWidth","LandauMPV","Normalisation","GaussianSigma")
         tf1.SetParameters(startwidth, startmpv, startnorm, startsigma)
+        if fixsigma:
+            tf1.FixParameter(3,startsigma)
         # run fit
         histogram.Fit(tf1, "0L", "", xlow, xhigh)
         # store the function object and return it

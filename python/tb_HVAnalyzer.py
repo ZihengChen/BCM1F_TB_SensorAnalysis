@@ -23,7 +23,7 @@ class HVAnalyzer():
           # if not available
           if runMng[backend+"_fitxmin"][0,irun] == -1:
             for channel in channels: 
-              for p in ["mu","mu_err"]:
+              for p in ["mu","mu_err","argmax"]:
                 key = "{}_{}_CH{}".format(p,backend,channel)
                 if key in runMng:
                   runMng[key].append(np.nan)
@@ -49,7 +49,7 @@ class HVAnalyzer():
             fitxmin = runMng[backend+"_fitxmin"][ich,irun]
             fitxmax = runMng[backend+"_fitxmax"][ich,irun]
             fitter = PulseAmpFitter(ch.pulseAmp)
-            fitter.fitRange(fitxmin,fitxmax,sigma)
+            fitter.fitRange(fitxmin,fitxmax,None)
 
             # plot
             if makePlots:
@@ -59,7 +59,7 @@ class HVAnalyzer():
               plt.close()
 
             # save fitting result
-            for p in ["mu","mu_err"]:
+            for p in ["mu","mu_err","argmax"]:
               key = "{}_{}_CH{}".format(p,backend,channel)
               if key in runMng:
                 runMng[key].append(fitter.param[p])

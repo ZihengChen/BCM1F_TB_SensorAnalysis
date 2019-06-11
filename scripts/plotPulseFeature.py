@@ -21,7 +21,6 @@ def plotFit():
   # plot
   fitter.plot()
   plt.title(title, fontsize=14)
-  #plt.savefig("../plots/pulseAmpFit/langaus_{}_run{}_{}.png".format(backend,run,channel),dpi=300)
 
 
 def plotHist2D():
@@ -30,7 +29,6 @@ def plotHist2D():
   jp.set_axis_labels(r'Amplitude','Position')
   #jp.ax_joint.plot([0,100])
   jp.ax_joint.set_title(title)
-  #plt.savefig("../plots/PulseHist2D/{}_run{}_{}.png".format(backend,run,channel),dpi=300)
 
 if __name__=="__main__":
   plotFit()
