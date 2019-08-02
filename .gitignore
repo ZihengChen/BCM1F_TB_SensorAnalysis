@@ -1,4 +1,6 @@
 _lagacy
 data
 plots
-python/__pycache__
+./notebooks/.ipynb_checkpoints
+./.vscode
+./python/__pycache__
